@@ -1,0 +1,25 @@
+.navbar {
+    border: none;
+}
+
+.navbar-brand {
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    text-indent: -99em;
+    width: 200px;
+    height: 65px;
+}
+
+.admin-nav a {
+    color: #FFF;
+}
+
+.nav.admin-nav>li>a:focus, .nav.admin-nav>li>a:hover {
+    background-color: #133a9e;
+}
+
+/* Defaults */
+textarea {
+    resize: none;
+}
