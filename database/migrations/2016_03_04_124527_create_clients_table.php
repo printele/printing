@@ -16,6 +16,7 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('logo');
             $table->string('name');
+            $table->string('description');
             $table->string('url');
             $table->timestamps();
         });

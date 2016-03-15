@@ -47,15 +47,15 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clients <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{route('clients')}}">All</a></li>
-                                <li><a href="#">New</a></li>
+                                <li><a href="{{route('new-client')}}">New</a></li>
                             </ul>
                         </li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Delivery Gallery <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">New</a></li>
+                                <li><a href="{{route('gallery')}}">All</a></li>
+                                <li><a href="{{route('new-item')}}">New</a></li>
                             </ul>
                         </li>
 

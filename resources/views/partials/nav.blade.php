@@ -29,8 +29,7 @@
             @if(Auth::check())
                 <div class="clearfix">
                     <div class="pull-right">
-                        <p class="text-right">Welcome</p>
-                        <p class="text-right">{{Auth::user()->name}}</p>
+                        <p class="text-right">Welcome, {{Auth::user()->name}}</p>
                         <p class="text-right">
                             {!! link_to_route('logout', 'Logout', null, ['class' => 'btn btn-default btn-sm']) !!}
                         </p>
@@ -46,7 +45,13 @@
             <div class="container">
                 <div class="navbar" style="margin-bottom: 0">
                     <div class="container-fluid">
+                        <ul class="nav navbar-nav" class="snav">
+                            <li>
+                                <a href="#">Products</a>
+                            </li>
+                        </ul>
                         <ul class="nav navbar-nav pull-right" id="snav">
+                            @if(Auth::check())
                             <li>
                                 <a id="cart">
                                     <i class="glyphicon glyphicon-shopping-cart"></i>
@@ -76,9 +81,7 @@
                                     </table>
                                 </div>
                             </li>
-                            <li>
-                                <a href="#">Products</a>
-                            </li>
+                            @endif
 
                         </ul>
                     </div>

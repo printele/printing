@@ -4,16 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class Promise extends Model
 {
     //
     protected $fillable = [
-        'logo',
-        'name',
+        'title',
         'description',
-        'url'
+        'image_path',
     ];
-
-
-
 }

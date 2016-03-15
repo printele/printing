@@ -3,24 +3,31 @@
 @section('contents')
     @include('partials.admin-nav')
     <ol class="breadcrumb">
-       <div class="container"> <li class="active">All Promises</li></div>
+        <li class="active">All Promises</li>
     </ol>
     <div class="container">
-        @for($i = 0; $i < 10; $i++)
-            <div class="col-md-3">
-                <div class="media">
-                    {!! Html::image(url('images/best_value.png'), null, ['class' => 'media-middle']) !!}
-                    <div class="media-body">
-                        <h4 class="media-heading text-center">
-                            Best Value
-                        </h4>
+        @if($promises->count() == 0)
 
-                        <p>
-                            Resurrection is not enlightened in unprepared places, the kingdom, or earth, but everywhere.
-                        </p>
+        @else
+            @foreach($promises as $promise)
+                <div class="col-md-3">
+                    <div class="media card">
+                        <figure class="media-middle">{!! Html::image(url($promise->image_path), null, ['class' => 'img-responsive']) !!}</figure>
+                        <div class="media-body">
+                            <h4 class="media-heading text-center">
+                                {{$promise->title}}
+                            </h4>
+
+                            <p class="text-center" style="height: 36px; overflow: hidden;">
+                                {{$promise->description}}
+                            </p>
+                        </div>
+                        {!! Form::open(['url' => route('delete-promise', ['id' => $promise->id]), 'method' => 'DELETE', 'class' => 'close']) !!}
+                        <button type="submit">&times;</button>
+                        {!! Form::close() !!}
                     </div>
                 </div>
-            </div>
-        @endfor
+            @endforeach
+        @endif
     </div>
 @endsection

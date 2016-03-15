@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +18,8 @@ class CustomerController extends Controller
     public function index()
     {
         //
-        return view('auth.customer.index');
+        $products = Product::all();
+        return view('auth.customer.index', compact('products'));
 
         //dd('Welcome to Printele Customer Center, ' . Auth::user()->name);
     }
@@ -86,5 +88,10 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProduct ($id)
+    {
+
     }
 }

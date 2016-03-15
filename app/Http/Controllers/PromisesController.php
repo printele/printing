@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Promise;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class PromisesController extends Controller
 {
+    protected $destinationPath = 'images/promises';
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +19,8 @@ class PromisesController extends Controller
     public function index()
     {
         //
-        return view('superadmin.promises.index');
+        $promises = Promise::all(['id','title', 'description', 'image_path']);
+        return view('superadmin.promises.index', compact('promises'));
 
     }
 
@@ -40,6 +44,26 @@ class PromisesController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+           'title' => 'required',
+            'description' => 'required',
+            'image' => 'required'
+        ]);
+
+        $file = $request->file('image');
+
+        $file_name = $file->getClientOriginalName();
+
+        $promise = new Promise();
+        $promise->title = $request->title;
+        $promise->description = $request->description;
+        $promise->image_path = $this->destinationPath . '/' . $file_name;
+
+        if ($promise->save()) {
+            $file->move($this->destinationPath, $file_name);
+
+            return redirect()->back();
+        }
 
     }
 
@@ -86,6 +110,11 @@ class PromisesController extends Controller
     public function destroy($id)
     {
         //
+        $promise = Promise::find($id);
+
+        $promise->delete();
+
+        return redirect()->back();
     }
 
 

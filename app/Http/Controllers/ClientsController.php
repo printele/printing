@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class ClientsController extends Controller
 {
+    protected $destinationPath = 'images/clients';
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +19,8 @@ class ClientsController extends Controller
     public function index()
     {
         //
-        return view('superadmin.clients.index');
+        $clients = Client::all(['id', 'logo', 'name', 'description', 'url']);
+        return view('superadmin.clients.index', compact('clients'));
     }
 
     /**
@@ -27,6 +31,7 @@ class ClientsController extends Controller
     public function create()
     {
         //
+        return view('superadmin.clients.new_client');
     }
 
     /**
@@ -38,6 +43,30 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+           'name' => 'required',
+            'description' => 'min:3',
+            'url' => 'required|url',
+            'image' => 'required'
+        ]);
+
+        $file = $request->file('image');
+
+        $file_name = $file->getClientOriginalName();
+
+        $client = new Client();
+        $client->name = $request->name;
+        $client->description = $request->description;
+        $client->url = $request->url;
+        $client->logo = $this->destinationPath . '/' . $file_name;
+
+        if ($client->save()) {
+            $file->move($this->destinationPath, $file_name);
+
+            return redirect()->back();
+        }
+
+
     }
 
     /**
@@ -83,5 +112,11 @@ class ClientsController extends Controller
     public function destroy($id)
     {
         //
+        $client = Client::find($id);
+
+        $client->delete();
+
+        return redirect()->back();
+
     }
 }

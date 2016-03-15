@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Gallery;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
 
-class ProductsController extends Controller
+class GalleryController extends Controller
 {
-    protected $destinationPath = 'images/products';
-
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +17,8 @@ class ProductsController extends Controller
     public function index()
     {
         //
-        $products = Product::all(['id', 'name', 'image_path', 'description']);
-
-        return view('superadmin.products.index', compact('products'));
+        $gallery = Gallery::all(['id', 'name', 'description', 'url']);
+        return view('superadmin.gallery.index', compact('gallery'));
     }
 
     /**
@@ -34,7 +29,7 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        return view('superadmin.products.new_product');
+        return view('superadmin.gallery.new_item');
     }
 
     /**
@@ -48,32 +43,20 @@ class ProductsController extends Controller
         //
         $this->validate($request, [
            'name' => 'required',
-           'image' => 'required',
            'description' => 'required',
-           'formate' => 'required',
-           'print' => 'required',
-           'paper' => 'required',
-           'quantity' => 'required',
+           'url' => 'required|url',
         ]);
 
-        $file = $request->file('image');
+        $item = new Gallery();
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->url = $request->url;
 
-        $file_name = $file->getClientOriginalName();
-
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->image_path = $this->destinationPath . '/' . $file_name;
-        $product->format = $request->formate;
-        $product->print = $request->print;
-        $product->papers = $request->paper;
-
-        if ($product->save()) {
-            $file->move($this->destinationPath, $file_name);
+        if ($item->save()) {
 
             return redirect()->back();
-        }
 
+        }
 
     }
 
@@ -86,8 +69,6 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
-        $product = Product::find($id);
-        return $product;
     }
 
     /**
@@ -122,10 +103,11 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
-        $product = Product::find($id);
+        $item = Gallery::find($id);
 
-        $product->delete();
+        $item->delete();
 
         return redirect()->back();
+
     }
 }

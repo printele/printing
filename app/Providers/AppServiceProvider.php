@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Client;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->composer('partials.footer', function ($view) {
+            $view->with('clients',Client::all(['id', 'name', 'logo', 'description', 'url']));
+        });
     }
 
     /**

@@ -10,7 +10,7 @@
                         <div class="row">
                             {!! Form::open(['url' => route('sign-in')]) !!}
                             <h3 class="page-header">
-                                Already registered
+                                Already Registered
                             </h3>
                             @if(Session::has('info'))
                                 <div class="alert alert-danger">
@@ -53,7 +53,7 @@
                     <section class="col-md-6" id="register">
                         {!! Form::open(['url' => route('sign-up')]) !!}
                         <h3 class="page-header">
-                            new customer
+                            New Customer
                         </h3>
                         @if(Session::has('reg'))
                             <div class="alert alert-danger">

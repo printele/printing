@@ -2,7 +2,9 @@ body {
     overflow: hidden;
     overflow-y: scroll;
 }
-
+a:visited, a {
+    outline: none;
+}
 header, section.clearfix {
     background-color: rgba(255, 255, 255, .98);
     background-blend-mode: overlay;
@@ -70,7 +72,14 @@ section.clearfix .container {
     background-color: #ffa042;
     color: #fff;
 }
-
+.card:first-child {
+    background: yellow;
+}
+.card {
+    margin-right: 15px;
+    background: red;
+    cursor: pointer;
+}
 .m-page-header {
     border-bottom: none;
     border-left: 3px solid #2b669a;
@@ -118,6 +127,12 @@ section.clearfix .container {
 }
 
 /*Steps Elements*/
+.step .step-header {
+    background-color: #2b669a;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+}
 .mt-element-step .row {
   margin-left: 25px;
 }
@@ -193,6 +208,26 @@ section.clearfix .container {
 }
 .mt-element-step .step-line .first .mt-step-title:before, .mt-element-step .step-line .last .mt-step-title:after {
     content: none;
+}
+#summary {
+    position: fixed;
+    width: 250px;
+    background-color: white;
+    box-shadow: 0 0 3px rgba(0,0,0,.8);
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,.4);
+    padding: 5px;
+}
+#summary legend {
+    color: white;
+    padding: 3px;
+    background-color: rgba(0,0,0,.5);
+}
+#summary #list li {
+    padding: 5px;
+    vertical-align: middle;
+}
+#list span:first-child {
+    color: #999;
 }
 
 /* Spinner */
@@ -285,6 +320,8 @@ section.clearfix .container {
 .dropzone .dz-preview {
     top: -200px;
 }
+
+
 
 @media (min-width: 992px) {
     .col-md-3 .media, .col-md-3 .media h4 {

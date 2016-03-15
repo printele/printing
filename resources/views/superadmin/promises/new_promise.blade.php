@@ -11,7 +11,7 @@
     </ol>
 
     <div class="container">
-        {!! Form::open() !!}
+        {!! Form::open(['url' => route('store-promise'), 'enctype' => 'multipart/form-data']) !!}
         @include('partials._promiseForm')
         {!! Form::submit("Add Promise", ['class' => 'btn btn-primary btn-lg flat-ui']) !!}
         {!! Form::close() !!}

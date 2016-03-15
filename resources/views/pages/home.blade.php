@@ -4,178 +4,170 @@
 
 
     <section class="clearfix">
-        <div class="container" style="padding-top: 0;">
+        <div class="container" style="padding-top: 10px;">
             <div id="slider">
                 <img src="{{url('images/slider3.jpg')}}" alt="" class="img-responsive">
             </div>
         </div>
     </section>
 
-    <section class="clearfix" style="padding-top: 20px">
-        <div class="container" style="padding-left: 100px">
-            <div class="mt-element-step">
-                <div class="row step-line">
+    @if($products->count() !== 0)
+        <section class="clearfix" style="padding-top: 20px">
+            <div class="container" style="padding: 20px">
+                <h2 class="page-header m-page-header">
+                    Products
+                </h2>
 
-                    <div class="col-md-2 mt-step-col first">
-                        <div class="mt-step-number bg-white">1</div>
-                        <div class="mt-step-title text-uppercase font-grey-scale">
-
-                        </div>
-                        <div class="mt-step-content font-grey-scale">
-                            select a service
-                        </div>
+                <div class="col-lg-12">
+                    <div class="slick-slider">
+                        @foreach($products as $product)
+                            <div class="media card">
+                                <figure class="media-middle">
+                                    <img src="{{url($product->image_path)}}" alt="Client's Logo"
+                                         class="img-responsive">
+                                </figure>
+                                <div class="media-body">
+                                    <h3 class="media-heading text-center">
+                                        {{$product->name}}
+                                    </h3>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-
-                    <div class="col-md-2 mt-step-col second">
-                        <div class="mt-step-number bg-white">2</div>
-                        <div class="mt-step-title text-uppercase font-grey-scale">
-
-                        </div>
-                        <div class="mt-step-content font-grey-scale">
-                            upload files
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 mt-step-col second">
-                        <div class="mt-step-number bg-white">3</div>
-                        <div class="mt-step-title text-uppercase font-grey-scale">
-
-                        </div>
-                        <div class="mt-step-content font-grey-scale">
-                            add guidelines
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 mt-step-col last">
-                        <div class="mt-step-number bg-white">4</div>
-                        <div class="mt-step-title text-uppercase font-grey-scale">
-
-                        </div>
-                        <div class="mt-step-content font-grey-scale">
-                            order confirmation
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 mt-step-col last">
-                        <div class="mt-step-number bg-white">5</div>
-                        <div class="mt-step-title text-uppercase font-grey-scale">
-
-                        </div>
-                        <div class="mt-step-content font-grey-scale">
-                            check out
-                        </div>
-                    </div>
-
                 </div>
+
+                {{--<div class="mt-element-step">
+                    <div class="row step-line">
+
+                        <div class="col-md-2 mt-step-col first">
+                            <div class="mt-step-number bg-white">1</div>
+                            <div class="mt-step-title text-uppercase font-grey-scale">
+
+                            </div>
+                            <div class="mt-step-content font-grey-scale">
+                                select a service
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mt-step-col second">
+                            <div class="mt-step-number bg-white">2</div>
+                            <div class="mt-step-title text-uppercase font-grey-scale">
+
+                            </div>
+                            <div class="mt-step-content font-grey-scale">
+                                upload files
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mt-step-col second">
+                            <div class="mt-step-number bg-white">3</div>
+                            <div class="mt-step-title text-uppercase font-grey-scale">
+
+                            </div>
+                            <div class="mt-step-content font-grey-scale">
+                                add guidelines
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mt-step-col last">
+                            <div class="mt-step-number bg-white">4</div>
+                            <div class="mt-step-title text-uppercase font-grey-scale">
+
+                            </div>
+                            <div class="mt-step-content font-grey-scale">
+                                order confirmation
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 mt-step-col last">
+                            <div class="mt-step-number bg-white">5</div>
+                            <div class="mt-step-title text-uppercase font-grey-scale">
+
+                            </div>
+                            <div class="mt-step-content font-grey-scale">
+                                check out
+                            </div>
+                        </div>
+
+                    </div>
+                </div>--}}
             </div>
-        </div>
-        <div class="container" style="padding-left: 100px">
-
-        </div>
-    </section>
-
-
+        </section>
+    @endif
 
     {{-- Delivery Gallery --}}
-    <section class="clearfix">
-        <div class="container" style="padding: 20px;">
-            <h2 class="page-header m-page-header">
-                Delivery Gallery
-            </h2>
+    @if($gallery->count() !== 0)
+        <section class="clearfix">
+            <div class="container" style="padding: 20px;">
+                <h2 class="page-header m-page-header">
+                    Delivery Gallery
+                </h2>
+                @foreach($gallery as $item)
+                    <div class="col-md-6">
+                        <iframe width="100%"
+                                src="{{$item->url}}"
+                                height="400px" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="page-header text-center">
+                            {{$item->name}}
+                        </h3>
 
-            <div class="col-md-6">
-                <iframe width="100%" src="https://www.youtube.com/embed/xo1VInw-SKc?list=PL7JgdmQ0zTfatnGhUnRBnhMwYEraSIRdD" height="400px" frameborder="0" scrolling="no" allowfullscreen></iframe>
-            </div>
-            <div class="col-md-6">
-                <h3 class="page-header text-center">TruValue Properties Flyers</h3>
-                <p>Description of work, order time and delivery, date and other specifications</p>
-                <span>Customer Name:</span>
-            </div>
+                        <p>
+                            {{$item->description}}
+                        </p>
+                        <span>Customer Name:</span>
+                    </div>
 
-        </div>
-    </section>
+                @endforeach
+            </div>
+        </section>
+    @endif
 
     {{-- Our promises --}}
-    <section class="clearfix">
+    @if($promises->count() !== 0)
+        <section class="clearfix">
 
-        <div class="container">
-            <h2 class="page-header m-page-header">
-                Our Promise
-            </h2>
+            <div class="container">
+                <h2 class="page-header m-page-header">
+                    Our Promise
+                </h2>
+                <?php $counter = 0; ?>
+                @foreach($promises as $promise)
+                    {{--@for($i = 1; $i < $promises->count(); $i++)--}}
+                    @if($counter == 0)
+                        <div class="row">
+                            @endif
+                            <div class="col-lg-3 col-md-3">
+                                <div class="media">
+                                    <figure class="media-middle">
+                                        <img class="media-object" src="{{url($promise->image_path)}}"
+                                             alt="{{$promise->title}}">
+                                    </figure>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            {{$promise->title}}
+                                        </h4>
 
-            <div class="row">
-
-                <div class="col-lg-3 col-md-3">
-                    <div class="media">
-                        <figure class="media-middle">
-                            <img class="media-object" src="{{url('images/best_value.png')}}" alt="Best Value">
-                        </figure>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                Best Value On Bulk Printing
-                            </h4>
-
-                            <p>
-                                Get more value on money spent for all your advertising and marketing needs.
-                            </p>
+                                        <p>
+                                            {{$promise->description}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $counter++; ?>
+                            @if($counter == 4)
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="media">
-                        <figure class="media-middle">
-                            <img class="media-object" src="{{url('images/free_and_fast_delivery.png')}}"
-                                 alt="Free And Fast Delivery">
-                        </figure>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                Time Saving
-                            </h4>
-
-                            <p>
-                                We understand why you can't wait to get your print items shipped to you as fast as YOU
-                                want
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="media">
-                        <figure class="media-middle">
-                            <img class="media-object" src="{{url('images/time_saving.png')}}" alt="Time Saving">
-                        </figure>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                Free and Fast Delivery
-                            </h4>
-
-                            <p>
-                                Our free courier service would deliver to you doorstep in no time.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="media">
-                        <figure class="media-middle">
-                            <img class="media-object" src="{{url('images/professional_services.png')}}"
-                                 alt="Professional Services">
-                        </figure>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                Professional Services
-                            </h4>
-
-                            <p>All our works are made and handled by professionals</p>
-                        </div>
-                    </div>
-                </div>
+                        <?php $counter = 0; ?>
+                    @endif
+                    {{-- @endfor--}}
+                @endforeach
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
+    @endif
 
 
 @endsection

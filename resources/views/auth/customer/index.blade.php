@@ -4,48 +4,137 @@
     <section class="clearfix">
         <div class="container-fluid">
             <div class="row">
-                <div class="loader">Loading...</div>
+                {{--<div class="loader">Loading...</div>--}}
                 <div class="container">
-                    <div class="col-lg-8">
-                        <!-- TAB NAVIGATION -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active"><a href="#tab1" role="tab" data-toggle="tab">New</a></li>
-                            <li class="pull-right"><a href="#tab2" role="tab" data-toggle="tab">Transactions</a></li>
-                        </ul>
-                        <!-- TAB CONTENT -->
-                        <div class="tab-content">
-                            <div class="active tab-pane fade in" id="tab1">
-                                <div class="clearfix">
-                                    <div class="step">
-                                        <span>1</span>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="slick-slider">
-                                            <div class="text-center">
-                                                <img src="{{url('images/slider3.jpg')}}" class="img-responsive" height="300px">
-                                            </div>
-                                            <div class="text-center">Posters</div>
-                                            <div class="text-center">Business Cards</div>
-                                            <div class="text-center">T-Shirt</div>
-                                            <div class="text-center">Brochures</div>
-                                            <div class="text-center">Bags</div>
-                                            <div class="text-center">Banners</div>
-                                            <div class="text-center">Invitation Cards</div>
-                                            <div class="text-center">Paper bags</div>
+                    <div class="col-lg-8 step">
+                        <div class="row" id="products">
+                            <div class="step-header">
+                                <span class="step-number">1.</span> Select a Product
+                            </div>
+                            <div class="slick-slider">
+                                @foreach($products as $product)
+                                    <div class="media card" data-id="{{$product->id}}">
+                                        <figure class="media-middle">
+                                            <img src="{{url($image = $product->image_path)}}" alt="Client's Logo"
+                                                 class="img-responsive">
+                                        </figure>
+                                        <div class="media-body">
+                                            <h3 class="media-heading text-center">
+                                                {{$product->name}}
+                                            </h3>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab2">
-                                <h2>Tab2</h2>
-
-                                <p>Lorem ipsum.</p>
+                                @endforeach
                             </div>
                         </div>
 
+                        <div class="row" id="options" style="display: none;">
+                            <div class="step-header">
+                                <span class="step-number">2.</span> Select options
+                            </div>
+                            <div class="slick-slider">
+                                <div class="col-md-4">
+                                    <h4>Format</h4>
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="format" id="inputID" value="" checked="checked">
+                                            A4
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="format" id="inputID" value="" checked="checked">
+                                            A5
+                                        </label>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>Print</h4>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="print" id="inputID" value="" checked="checked">
+                                            Front
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="print" id="inputID" value="" checked="checked">
+                                            Front and Black
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="print" id="inputID" value="" checked="checked">
+                                            Black
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>Paper</h4>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="paper" id="inputID" value="" checked="checked">
+                                            Gloss Coated
+                                        </label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="paper" id="inputID" value="" checked="checked">
+                                            Coated Mattle
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
-                    <div class="col-lg-4">
-                        summary
+                    <div class="col-lg-3 col-lg-offset-1 clearfix">
+                        <form id="summary">
+                            <legend class="text-center">
+                                Order Summary
+                            </legend>
+                            <div>
+                                <img src="{{url($image)}}" alt="" class="img-responsive" id="selected-img"
+                                     style="margin: 0 auto;">
+                            </div>
+                            <ul style="list-style: none;padding: 0;margin: 0;" id="list">
+                                <li>
+                                    <span class="option">Format:</span>
+                                </li>
+                                <li>
+                                    <span class="option">Print:</span>
+                                </li>
+                                <li>
+                                    <span class="option">Paper:</span>
+                                </li>
+                                <li>
+                                    <span class="option">Quantity:</span>
+                                </li>
+                            </ul>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="sample" id="">
+                                    Sample Print
+                                </label>
+                            </div>
+                            <div class="clearfix">
+                                <button href="" class="btn btn-primary flat-ui btn-block">
+                                    Confirm Order
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -58,7 +147,7 @@
         $(document).ready(function () {
             $('.slick-slider').slick({
                 slidesToShow: 4,
-                slidesToScroll: 1,
+                slidesToScroll: 4,
                 arrows: true,
             });
             /*$('.slide-for').slick({
@@ -68,8 +157,23 @@
              asNavFor: '.slick-slider'
              });*/
 
-            $('.slick-slider').on('afterChange', function (event, slick, currentSlide, nextSlide) {
-                console.log(slick);
+            $('.slick-slider .card').on('click', function () {
+                $this = $(this);
+                var id = $(this).data('id');
+                var src = $(this).find('figure img').attr('src');
+                console.log();
+                $('#selected-img').load().attr('src', src);
+                $.get(baseUrl + 'customer/product/' + id, null, process);
+                function process(data) {
+                    $this.parent('#products').next().fadeIn(200);
+                    $.each(data, function (index, value) {
+                        console.log(index);
+                        if (index == "format") {
+                            console.log(value);
+                            var formats;
+                        }
+                    });
+                }
             });
 
             $('.navigation').on('click', function (e) {

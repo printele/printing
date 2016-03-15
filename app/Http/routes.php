@@ -11,10 +11,25 @@
 |
 */
 
-Route::get('/', [
-    'uses' => 'PagesController@home',
-    'as' => 'home'
-]);
+Route::get('/test', function () {
+    $ar = ["1","3",4,5,6,7];
+
+    $counter = 0;
+
+    foreach ($ar as $number) {
+        if ($counter == 0) {
+            echo 'row<br>';
+        }
+        echo $number . ' ' . $counter .'<br>';
+        $counter++;
+        if ($counter == 4) {
+            echo 'endrow<br>';
+            $counter = 0;
+        }
+
+    }
+
+});
 
 
 /*
@@ -32,6 +47,14 @@ Route::group(['middleware' => ['web']], function () {
     //
 
 
+    Route::get('/', [
+        'uses' => 'PagesController@home',
+        'as' => 'home',
+        'middleware' => ['guest']
+    ]);
+
+
+
     Route::get('/login', [
         'uses' => 'AuthController@index',
         'as' => 'login'
@@ -47,11 +70,19 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'sign-up'
     ]);
 
+    /*Route::get('/product/{id}', [
+       'uses' => 'ProductsController@show'
+    ]);*/
+
     Route::group(['prefix' => 'customer', 'middleware' => ['auth']], function () {
 
         Route::get('/', [
             'uses' => 'CustomerController@index',
             'as' => 'customer.index'
+        ]);
+
+        Route::get('/product/{id}', [
+            'uses' => 'ProductsController@show'
         ]);
 
     });
@@ -76,6 +107,16 @@ Route::group(['middleware' => ['web']], function () {
                 'as' => 'new-product'
             ]);
 
+            Route::post('/new-product', [
+                'uses' => 'ProductsController@store',
+                'as' => 'store-product'
+            ]);
+
+            Route::delete('/remove/{id}', [
+                'uses' => 'ProductsController@destroy',
+                'as' => 'delete-product'
+            ]);
+
         });
 
         Route::group(['prefix' => 'promises'], function () {
@@ -90,6 +131,16 @@ Route::group(['middleware' => ['web']], function () {
                 'as' => 'new-promise'
             ]);
 
+            Route::post('/new-promise', [
+                'uses' => 'PromisesController@store',
+                'as' => 'store-promise'
+            ]);
+
+            Route::delete('/remove/{id}', [
+               'uses' => 'PromisesController@destroy',
+                'as' => 'delete-promise'
+            ]);
+
 
         });
 
@@ -100,7 +151,50 @@ Route::group(['middleware' => ['web']], function () {
                 'as' => 'clients'
             ]);
 
+            Route::get('/new-client', [
+                'uses' => 'ClientsController@create',
+                'as' => 'new-client'
+            ]);
+
+            Route::post('/new-client', [
+                'uses' => 'ClientsController@store',
+                'as' => 'store-client'
+            ]);
+
+            Route::delete('/remove/{id}', [
+                'uses' => 'ClientsController@destroy',
+                'as' => 'delete-client'
+            ]);
+
+
         });
+
+        Route::group(['prefix' => 'gallery'], function () {
+
+            Route::get('/', [
+                'uses' => 'GalleryController@index',
+                'as' => 'gallery'
+            ]);
+
+            Route::get('/new-item', [
+                'uses' => 'GalleryController@create',
+                'as' => 'new-item'
+            ]);
+
+            Route::post('/new-item', [
+                'uses' => 'GalleryController@store',
+                'as' => 'store-item'
+            ]);
+
+            Route::delete('/remove/{id}', [
+                'uses' => 'GalleryController@destroy',
+                'as' => 'delete-item'
+            ]);
+
+
+        });
+
+
 
     });
 
